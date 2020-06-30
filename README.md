@@ -13,10 +13,7 @@ Below is the screenshot of the generated map.
 <img src="map.png"/>
 
 ### Navigation Testing
-The map generated from the previous task is used for localization and navigation for this task. `test_navigation.sh` is the name of the script file. The script runs gazebo, amcl, and rviz. We can use rviz to manually send goal location and see how the robot can successfully go there
-
-Below is the screenshot of localization in rviz
-<img src="localization.png"/>
+The map generated from the previous task is used for localization and navigation for this task. `test_navigation.sh` is the name of the script file. The script runs gazebo, amcl, and rviz. We can use rviz to manually send goal location and see how the robot can successfully go there.
 
 ### Pick Object
 In this task, the pick up and drop off location is specified in c++ code so that the robot can navigate there without using rviz to send goal location. `pick_objects.sh` is the name of the script. The script runs gazebo, amcl, rviz, and pick_objects node.
