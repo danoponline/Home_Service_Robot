@@ -30,8 +30,8 @@ int main( int argc, char** argv )
     marker.action = visualization_msgs::Marker::ADD;
 
     // Set the pose of the marker at the pick up location
-    marker.pose.position.x = 2.0;
-    marker.pose.position.y = 0.5;
+    marker.pose.position.x = 5.5;
+    marker.pose.position.y = 0.0;
     marker.pose.position.z = 0;
     marker.pose.orientation.x = 0.0;
     marker.pose.orientation.y = 0.0;
@@ -79,8 +79,8 @@ int main( int argc, char** argv )
     marker.action = visualization_msgs::Marker::ADD;
 
     // Set the pose of the marker at the drop up location
-    marker.pose.position.x = -2.0;
-    marker.pose.position.y = -1.0;
+    marker.pose.position.x = 0.0;
+    marker.pose.position.y = 3.5;
     marker.pose.position.z = 0;
     marker.pose.orientation.x = 0.0;
     marker.pose.orientation.y = 0.0;

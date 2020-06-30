@@ -122,8 +122,8 @@ private:
   ros::Subscriber marker_sub_;
   uint32_t shape;
   visualization_msgs::Marker marker;
-  double pick_up_pose[3] = {2.0,0.5,1.0};
-  double drop_off_pose[3] = {-2.0,-1.0,1.0};
+  double pick_up_pose[3] = {5.5,0.0,1.0};
+  double drop_off_pose[3] = {0.0,3.5,1.0};
   bool picked_up = false;
   bool already_displayed = false;
 
