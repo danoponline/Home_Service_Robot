@@ -8,8 +8,19 @@ class AddMarkers
 public:
   
   // Constructor
-  AddMarkers()
+  AddMarkers(const double* pick_up_pose_ptr, const double* drop_off_pose_ptr)
   {
+
+    // Initialize pick up pose and drop off pose
+    for (int i = 0; i < 2; ++i){
+       pick_up_pose[i] = *(pick_up_pose_ptr + i);
+       drop_off_pose[i] = *(drop_off_pose_ptr + i);
+    }
+
+    // Initialize private marker states
+    picked_up = false;
+    already_displayed = false;
+
     // Set up maker publisher
     marker_pub_ = n_.advertise<visualization_msgs::Marker>("visualization_marker", 1);
 
@@ -55,7 +66,7 @@ public:
     marker.pose.orientation.x = 0.0;
     marker.pose.orientation.y = 0.0;
     marker.pose.orientation.z = 0.0;
-    marker.pose.orientation.w = pick_up_pose[2];
+    marker.pose.orientation.w = 1.0;
        
     while(marker_pub_.getNumSubscribers() < 1) {
        ROS_WARN_ONCE("Please create a subscriber to the marker");
@@ -78,7 +89,7 @@ public:
     double distance_to_pick_up = sqrt(pow((pick_up_pose[0]-x_pos),2)+pow((pick_up_pose[1]-y_pos),2));
     double distance_to_drop_off = sqrt(pow((drop_off_pose[0]-x_pos),2)+pow((drop_off_pose[1]-y_pos),2));
 
-    if (distance_to_pick_up < 0.2 && !picked_up){
+    if (distance_to_pick_up < 0.5 && !picked_up){
        
        // Set the marker action.  Options are ADD, DELETE, and new in ROS Indigo: 3 (DELETEALL)
        marker.action = visualization_msgs::Marker::DELETE;
@@ -93,7 +104,7 @@ public:
        already_displayed = false;
     }
     
-    else if (distance_to_drop_off < 0.2 && picked_up && !already_displayed){
+    else if (distance_to_drop_off < 0.5 && picked_up && !already_displayed){
        
        // Set the marker action.  Options are ADD, DELETE, and new in ROS Indigo: 3 (DELETEALL)
        marker.action = visualization_msgs::Marker::ADD;
@@ -105,7 +116,7 @@ public:
        marker.pose.orientation.x = 0.0;
        marker.pose.orientation.y = 0.0;
        marker.pose.orientation.z = 0.0;
-       marker.pose.orientation.w = drop_off_pose[2];
+       marker.pose.orientation.w = 1.0;
        
        // Publish marker
        marker_pub_.publish(marker);
@@ -122,20 +133,24 @@ private:
   ros::Subscriber marker_sub_;
   uint32_t shape;
   visualization_msgs::Marker marker;
-  double pick_up_pose[3] = {5.5,0.0,1.0};
-  double drop_off_pose[3] = {0.0,3.5,1.0};
-  bool picked_up = false;
-  bool already_displayed = false;
+  double pick_up_pose[2];
+  double drop_off_pose[2];
+  bool picked_up;
+  bool already_displayed;
 
-};//End of class AddMarkers
+};// End of class AddMarkers
 
 int main(int argc, char **argv)
 {
-  //Initiate ROS
+  // Initiate ROS
   ros::init(argc, argv, "add_markers");
 
-  //Create an object of class AddMarkers that will take care of everything
-  AddMarkers add_markers;
+  // Define pick up and drop off pose (x,y)
+  double pick_up_pose[2] = {5.5,0.0};
+  double drop_off_pose[2] = {0.0,3.5};
+
+  // Create an object of class AddMarkers that will take care of everything
+  AddMarkers add_markers(pick_up_pose, drop_off_pose);
 
   ros::spin();
 
