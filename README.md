@@ -5,7 +5,7 @@ This project is the final project, part of Udacity Robotic Software Engineer Nan
 There are five tasks in this project. All the script files to run are in `<This repo>/my_home_service_robot/scripts` folder.
 
 ### SLAM Testing
-In this task, we use slam_gmapping package to generate a map of our environment. This map will be use for the incomming tasks. `test_slam.sh` is the name of the script file. This script runs gazebo, slam_gmapping, rviz, and teleop. After mapping, the map can be saved using a command
+In this task, we use slam_gmapping package to generate a map of our environment. This map will be used for the incomming tasks. `test_slam.sh` is the name of the script file. This script runs gazebo, slam_gmapping, rviz, and teleop. After mapping, the map can be saved using a command
 ```
 rosrun map_server map_saver
 ```
@@ -24,7 +24,7 @@ In this task, we add a virtual object in rviz to represent the object to be pick
 ### Home Service
 This is the last task of this project that combines all the previous tasks above in action. Basically, the robot localizes and navigates through the map in rviz; moves to pick up location and picks up a virtual object, waits 5 seconds; moves to drop off location and drops off the virtual object. `home_service.sh` is the name of the script. The script runs gazebo, amcl, rviz, pick_objects and add_markers_sync_robot node. The difference between add_markers and add_markers_sync_robot node is that the latter synchronizes the display of the virtual object when the robot reaches the pick up or the drop off location. The add_markers does not synchronize the timing.
 
-Below is the screenshot of the roboting running home service.
+Below is the screenshot of the robot running home service.
 <img src="home_service.png"/>
 
 ## Basic Build Instructions
